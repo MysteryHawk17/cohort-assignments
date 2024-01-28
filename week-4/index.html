@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 10px;
+      }
+      h1{
+        text-align: center;
+      color: #333;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: 36px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 8px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .todo {
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+
+      }
+
+      .title {
+        font-weight: bold;
+        font-size: 30px;
+      }
+
+      .description {
+        color: #666;
+        margin-bottom: 5px;
+      }
+      .but-container{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+      }
+      
+    </style>
+    <script>
+      let globalId = 1;
+      let todoState = [];
+      let oldTodoState = [];
+
+      function addTodoToDom(todo) {
+        const parent = document.getElementById("todos");
+        const createChild = document.createElement("div");
+        createChild.setAttribute("class", "todo");
+        createChild.setAttribute("data-id", todo.id); 
+        const createTitle = document.createElement("div");
+        createTitle.setAttribute("class", "title");
+        const createDescription = document.createElement("div");
+        createDescription.setAttribute("class", "description");
+        const createId = document.createElement("div");
+        createId.setAttribute("class", "id");
+        createTitle.innerHTML = todo.title;
+        createDescription.innerHTML = todo.description;
+        createId.innerHTML = todo.id;
+        const buttonContainer=document.createElement("div");
+        buttonContainer.setAttribute("class","but-container");
+        const editButton = document.createElement("button");
+        editButton.innerHTML = "Edit";
+        editButton.setAttribute("class","todo-button");
+        editButton.onclick = function () {
+          editTodo(todo.id);
+        };
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.setAttribute("class","todo-button");
+        deleteButton.onclick = function () {
+          deleteTodo(todo.id);
+        };
+        buttonContainer.append(editButton);
+        buttonContainer.append(deleteButton);
+        createChild.append(createTitle);
+        createChild.append(createDescription);
+        createChild.append(createId);
+        createChild.append(buttonContainer)
+        parent.append(createChild);
+      }
+
+      function removeTodoFromDom(todoId) {
+        const todo = document.querySelector(`.todo[data-id="${todoId}"]`);
+        if (todo) {
+          todo.remove();
+        }
+      }
+
+      function updateTodoInDom(oldTodo, newTodo) {
+        const todo = document.querySelector(`.todo[data-id="${oldTodo.id}"]`);
+        if (todo) {
+          todo.querySelector(".title").innerHTML = newTodo.title;
+          todo.querySelector(".description").innerHTML = newTodo.description;
+        }
+      }
+
+      function updateState(newTodos) {
+        const added = [];
+        const deleted = [];
+        const updated = [];
+
+        newTodos.forEach((newTodo) => {
+          const matchedOldTodo = oldTodoState.find(
+            (oldTodo) => oldTodo.id === newTodo.id
+          );
+          if (matchedOldTodo) {
+            if (
+              matchedOldTodo.description !== newTodo.description ||
+              matchedOldTodo.title !== newTodo.title
+            ) {
+              updated.push(newTodo);
+            }
+          } else {
+            added.push(newTodo);
+          }
+        });
+
+        oldTodoState.forEach((oldTodo) => {
+          const matchedNewTodo = newTodos.find(
+            (newTodo) => newTodo.id === oldTodo.id
+          );
+          if (!matchedNewTodo) {
+            deleted.push(oldTodo.id);
+          }
+        });
+
+        added.forEach((todo) => addTodoToDom(todo));
+        deleted.forEach((todoId) => removeTodoFromDom(todoId));
+        updated.forEach((todo) => {
+          const oldTodo = oldTodoState.find((t) => t.id === todo.id);
+          updateTodoInDom(oldTodo, todo);
+        });
+
+        oldTodoState =[...newTodos]
+      }
+
+      function addTodo() {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        todoState.push({
+          title: title,
+          description: description,
+          id: globalId++,
+        });
+        updateState(todoState);
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+      }
+
+      function editTodo(todoId) {
+        const todoIndex = todoState.findIndex((todo) => todo.id === todoId);
+        if (todoIndex !== -1) {
+          const todo = todoState[todoIndex];
+          const newTitle = prompt("Enter new title", todo.title);
+          const newDescription = prompt(
+            "Enter new description",
+            todo.description
+          );
+          if (newTitle !== null && newDescription !== null) {
+            todoState[todoIndex] = {
+              ...todoState[todoIndex],
+              title: newTitle,
+              description: newDescription,
+            };
+            updateState(todoState);
+          }
+        }
+      }
+
+      function deleteTodo(todoId) {
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this todo?"
+        );
+        if (confirmDelete) {
+          todoState = todoState.filter((todo) => todo.id !== todoId);
+          updateState(todoState);
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>Todo App</h1>
+    <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
+    <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
+    <button onclick="addTodo()">Add todo</button>
+    <br /> <br />
+  
+    <div id="todos">
+  
+    </div>
+  </body>
+</html>
