@@ -1,0 +1,62 @@
+.paragraph-generator-container {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.paragraph-generator-container .heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.paragraph-generator-container .input-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 20px;
+}
+
+.paragraph-generator-container .input {
+    flex: 2;
+    padding: 16px;
+    margin-right: 10px;
+    height: 30px;
+    border: 2px solid black;
+    font-size: 2em;
+
+}
+
+.paragraph-generator-container .button {
+
+  padding: 20px;
+  height: 60px;
+    flex: 0.3;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 20px;
+}
+
+.paragraph-generator-container .button:hover {
+    background-color: #111; 
+}
+
+.paragraph-generator-container .paragraph-container {
+    margin-top: 20px;
+}
+
+.paragraph-generator-container .paragraph {
+    font-size: 18px;
+    line-height: 1.5;
+}

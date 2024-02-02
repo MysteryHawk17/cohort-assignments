@@ -1,0 +1,46 @@
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5; 
+  }
+  
+  .login-card {
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  .login-header {
+    color: #333333; 
+    margin-bottom: 20px;
+  }
+  
+  .phone-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc; 
+    border-radius: 4px;
+    background-color: #f5f5f5; 
+    color: #333333; 
+  }
+  
+  .send-otp-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; 
+    color: #ffffff; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .send-otp-btn:hover {
+    background-color: #0056b3;
+  }
+  
