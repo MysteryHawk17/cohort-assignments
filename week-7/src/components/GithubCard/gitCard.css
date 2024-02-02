@@ -1,64 +1,84 @@
 body {
-    background: linear-gradient(135deg, #3494e6, #ec6ead);
-    color: #333;
-  }
-  
-  .GitCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .GitCard  .form-container {
-    margin-bottom: 20px;
-  }
-  
-  .GitCard input {
-    padding: 10px;
-    margin-right: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-  }
-  
-  .GitCard button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  background: linear-gradient(135deg, #3494e6, #ec6ead);
+  color: #333;
+}
+
+.GitCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.GitCard .form-container {
+  margin-bottom: 20px;
+}
+
+.GitCard input {
+  padding: 8px; 
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 200px; 
+}
+
+.GitCard button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.GitCard .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(240, 170, 237);
+  width: 20em;
+}
+
+.GitCard .card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.GitCard .user-details {
+  text-align: center;
+  color: black;
+}
+
+.GitCard.loader {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 600px) {
   .GitCard .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: rgb(240, 170, 237);
-    width: 20em;
+      width: 90%;
   }
-  
- .GitCard .card img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+
+  .GitCard input {
+      width: 150px; 
   }
-  
- .GitCard .user-details {
-    text-align: center;
-    color: black;
+}
+
+@media only screen and (max-width: 400px) {
+  .GitCard input,
+  .GitCard button {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 10px;
   }
-  
-  .GitCard.loader {
-    font-size: 20px;
-    margin-top: 20px;
-  }
-  
+}

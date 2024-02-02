@@ -1,44 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom React Renderer</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="root"></div>
-
     <script>
-        const reactElement = {
-            type: 'a',
-            props: {
-                href: 'https://week-7-mh17.vercel.app/',
-                children: 'Week 7 Assignments'
-            }
-        };
+      const reactElement = {
+        type: "a",
+        props: {
+          href: "https://week-7-mh17.vercel.app/",
+          children: "Week 7 Assignments",
+        },
+      };
+      function generateHTML(element) {
+        const { type, props } = element;
+        const children = props.children;
+        delete props.children;
 
-        function generateHTML(element) {
-            const { type, props } = element;
-            const children = props.children;
-            delete props.children;
-
-            let attributes = '';
-            for (let key in props) {
-                if (props.hasOwnProperty(key)) {
-                    attributes += `${key}="${props[key]}" `;
-                }
-            }
-
-            return `<${type} ${attributes}>${children}</${type}>`;
+        let attributes = "";
+        for (let key in props) {
+          if (props.hasOwnProperty(key)) {
+            attributes += `${key}="${props[key]}" `;
+          }
         }
 
+        return `<${type} ${attributes}>${children}</${type}>`;
+      }
+      function customRender(element, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = generateHTML(element);
+      }
 
-        function customRender(element, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = generateHTML(element);
-        }
-
-        customRender(reactElement, 'root');
+      customRender(reactElement, "root");
     </script>
-</body>
+  </body>
 </html>

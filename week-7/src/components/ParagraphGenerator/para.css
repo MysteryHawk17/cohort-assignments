@@ -1,3 +1,4 @@
+
 .paragraph-generator-container {
     text-align: center;
     padding: 20px;
@@ -8,6 +9,7 @@
     height: 100vh;
     overflow-y: scroll;
 }
+
 
 .paragraph-generator-container .heading {
     font-size: 24px;
@@ -30,13 +32,11 @@
     height: 30px;
     border: 2px solid black;
     font-size: 2em;
-
 }
 
-.paragraph-generator-container .button {
 
-  padding: 20px;
-  height: 60px;
+.paragraph-generator-container .button {
+    height: 60px;
     flex: 0.3;
     padding: 5px 10px;
     background-color: #000;
@@ -52,11 +52,25 @@
     background-color: #111; 
 }
 
+
 .paragraph-generator-container .paragraph-container {
     margin-top: 20px;
 }
 
+
 .paragraph-generator-container .paragraph {
     font-size: 18px;
     line-height: 1.5;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .paragraph-generator-container .input-container {
+        flex-direction: column;
+    }
+    
+    .paragraph-generator-container .input {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 }
